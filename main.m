@@ -15,12 +15,12 @@ global imgpadG;         global imgprepadG;      %The grayscale image of the curr
 global  const1;         global  const2;         
 
 %% 
-outputVideo = VideoWriter('_near_result.avi'); 
+outputVideo = VideoWriter('_far_result.avi'); 
 outputVideo.Quality = 100; 
 outputVideo.FrameRate = 5; 
 open(outputVideo); 
 %% read video 
-mov=VideoReader("E:\downloade\SMA-Chip-level-Real-world-Low-Light-Video-Denoising-Based-on-Scalable-Motion-Analysis-main\dataset\noisy_near.avi");
+mov=VideoReader("E:\downloade\SMA-Chip-level-Real-world-Low-Light-Video-Denoising-Based-on-Scalable-Motion-Analysis-main\dataset\noisy_far.avi");
 n=mov.NumberOfFrames;
 directory = 'E:\downloade\SMA-Chip-level-Real-world-Low-Light-Video-Denoising-Based-on-Scalable-Motion-Analysis-main\speedtest';
 if ~exist(directory, 'dir')
@@ -28,8 +28,8 @@ if ~exist(directory, 'dir')
 end
 
 %% set save path
-ori_pic = fullfile(directory, 'ori_near.jpg');        
-denos_pic = fullfile(directory, 'result_near.jpg');    
+ori_pic = fullfile(directory, 'ori_far.jpg');        
+denos_pic = fullfile(directory, 'result_far.jpg');    
 
 %% initialize
 average_level=5;  
@@ -103,7 +103,7 @@ for outer_loop=2:n
     imgpadG=double(rgb2gray(imgpad));
     %write    
     %name0=[directory num2str(outer_loop)  ori_pic];
-    name0 = fullfile(directory, [num2str(outer_loop) '_ori_near.jpg']);
+    name0 = fullfile(directory, [num2str(outer_loop) '_ori_far.jpg']);
     %% T
     thresh = getT(imgpadG,imgprepadG,SADsize)*1.5
     %thresh=25.7;
@@ -201,4 +201,6 @@ end
 warning('on','all');
 %aviobj=close(aviobj);
 close(outputVideo); 
+
+
 
